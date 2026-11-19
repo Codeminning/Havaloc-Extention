@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Haveloc Monitor</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-title">
+      <span class="dot" id="statusDot"></span>
+      <span>Haveloc Monitor</span>
+    </div>
+    <div class="header-controls">
+      <button id="togglePreferencesBtn" class="icon-btn" title="Preferences & Filters">⚙️</button>
+      <label class="switch" title="Turn monitoring on/off">
+        <input type="checkbox" id="monitoringToggle" />
+        <span class="slider"></span>
+      </label>
+    </div>
+  </header>
+
+  <!-- MAIN JOBS VIEW -->
+  <main id="jobsView">
+    <section class="status-row">
+      <div class="status-text" id="statusText">Checking status…</div>
+      <div class="status-detail" id="statusDetail"></div>
+    </section>
+
+    <section class="stats">
+      <div class="stat">
+        <div class="stat-value" id="lastChecked">—</div>
+        <div class="stat-label">Last checked</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="trackedCount">—</div>
+        <div class="stat-label">Tracked jobs</div>
+      </div>
+    </section>
+
+    <section class="jobs-section">
+      <div class="section-header">
+        <span class="section-title">Eligible Jobs</span>
+        <label class="filter-toggle" title="Show only jobs that match your preferences">
+          <input type="checkbox" id="filterMatchingOnly" />
+          <span>Only matching</span>
+        </label>
+      </div>
+      <div id="jobsList" class="jobs-list">
+        <div class="empty-state">No jobs detected yet.</div>
+      </div>
+    </section>
+
+    <section class="actions">
+      <button id="checkNowBtn" class="btn btn-primary">Check Now</button>
+      <button id="openHavelocBtn" class="btn btn-secondary">Open Haveloc</button>
+    </section>
+  </main>
+
+  <!-- PREFERENCES VIEW -->
+  <section id="preferencesView" class="preferences-view hidden">
+    <div class="pref-header">
+      <h3>Job Preferences</h3>
+      <button id="closePreferencesBtn" class="btn-text">✕ Back</button>
+    </div>
+
+    <form id="preferencesForm" class="pref-form">
+      <div class="form-group">
+        <label for="prefKeywords">Preferred Roles / Keywords</label>
+        <input type="text" id="prefKeywords" placeholder="e.g. Software, React, Python, SDE" />
+        <span class="hint">Comma-separated keywords to match</span>
+      </div>
+
+      <div class="form-group">
+        <label for="prefLocations">Preferred Locations</label>
+        <input type="text" id="prefLocations" placeholder="e.g. Bangalore, Remote, Chennai" />
+      </div>
+
+      <div class="form-group">
+        <label>Job Types</label>
+        <div class="checkbox-group">
+          <label class="cb-label"><input type="checkbox" id="prefTypeIntern" value="intern" /> Internship</label>
+          <label class="cb-label"><input type="checkbox" id="prefTypeFull" value="full" /> Full-Time</label>
+          <label class="cb-label"><input type="checkbox" id="prefTypePart" value="part" /> Part-Time</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="prefMinSalary">Min Salary / Stipend</label>
+        <input type="text" id="prefMinSalary" placeholder="e.g. 6 LPA or 25000/mo" />
+      </div>
+
+      <div class="form-group">
+        <label for="prefExcluded">Exclude Companies</label>
+        <input type="text" id="prefExcluded" placeholder="e.g. Revature, CompanyX" />
+        <span class="hint">Comma-separated companies to exclude</span>
+      </div>
+
+      <div class="form-group checkbox-single">
+        <label class="cb-label">
+          <input type="checkbox" id="prefNotifyOnlyMatching" />
+          <span><strong>Notify only for matching jobs</strong></span>
+        </label>
+      </div>
+
+      <div class="pref-actions">
+        <button type="submit" id="savePreferencesBtn" class="btn btn-primary">Save Preferences</button>
+      </div>
+      <div id="prefStatusMsg" class="pref-status"></div>
+    </form>
+  </section>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
